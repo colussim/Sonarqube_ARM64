@@ -1,4 +1,5 @@
 # Run SonarQube in a container on a ARM-based Mac
+![SonarQube](sonar.png)
 
 As of November 2022, the official Docker image for SonarQube does not support [the AArch64 architecture (arm64)](https://en.wikipedia.org/wiki/AArch64) as used for instance on Apple MacBook with an M1 chip. 
 
