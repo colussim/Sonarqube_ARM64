@@ -62,8 +62,9 @@ Extracting compressed file
 Image resized.
 Machine init complete
 To start your machine run:
-
+```
         podman machine start
+```        
 #        
 ```
 The system downloads the virtual machine and sets it up.
