@@ -101,12 +101,14 @@ Mounting volume...
 
 Machine "podman-machine-default" started successfully
 #
-.....
+
+```
 The output confirms the system started the Podman machine successfully.
 
 Podman, like others, is based on a configuration file called containers.conf and is located in ~/.config/containers. It allows, in particular, to position some paths.
 
 To verify, you can ssh into the VM and set kernel parameters needed for Sonarqube using:
+
 ```
 # podman machine ssh
 
@@ -115,4 +117,37 @@ Fedora CoreOS 36.20220806.2.0
 Tracker: https://github.com/coreos/fedora-coreos-tracker                                                                                                                                       
 Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                                            
 [root@localhost ~]#
+```
+and then check the podman version installed inside the VM:
+```
+[root@localhost ~]# podman version
+
+Client:       Podman Engine
+Version:      4.2.0
+API Version:  4.2.0
+Go Version:   go1.18.5
+Built:        Wed Aug 10 22:46:05 2022
+OS/Arch:      darwin/arm64
+
+Server:       Podman Engine
+Version:      4.1.1
+API Version:  4.1.1
+Go Version:   go1.18.4
+Built:        Fri Jul 22 21:06:49 2022
+OS/Arch:      linux/arm64
+[root@localhost ~]#
+```
+Show Podman machine run:
+```
+# podman machine list                                                                                                     
+NAME                    VM TYPE     CREATED     LAST UP            CPUS        MEMORY      DISK SIZE                                                                                           
+podman-machine-default  qemu        4 days ago  Currently running  4           5.243GB     107.4GB
+#
+#
+```
+Aliasing Docker with Podman
+
+Force of habit (or other scripts) may have you calling docker. To work around this:
+```
+# alias docker=podman
 ```
