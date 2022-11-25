@@ -6,9 +6,9 @@ This article illustrates a workaround for that limitation.
 
 Podman is used to start a virtual machine that can host your x86_64 or arm64 containers.
 
-This guide has been tested on an Apple MacBook with an M1 chip but should work similarly well on more recent chips such as the M2
+> This guide has been tested on an Apple MacBook with an M1 chip but should work similarly well on more recent chips such as the M2
 
-Introducing Podman
+## Introducing Podman
 
 Podman is an alternative solution to the Docker engine that is becoming more and more popular in the containerization world. It is backed by Red Hat, which uses Podman it in Openshift, its Kubernetes distribution.
 
