@@ -1,6 +1,6 @@
 # Run SonarQube in a container on a ARM-based Mac
 
-As of November 2022, the official Docker image for SonarQube does not support the AArch64 architecture (arm64) as used for instance on Apple MacBook with an M1 chip. 
+As of November 2022, the official Docker image for SonarQube does not support [the AArch64 architecture (arm64)](https://en.wikipedia.org/wiki/AArch64) as used for instance on Apple MacBook with an M1 chip. 
 
 This article illustrates a workaround for that limitation. 
 
@@ -89,7 +89,7 @@ This configuration is not sufficient to run Sonarqube .So I initialized the foll
 
 See documentation machine-init
 
-All its parameters can be changed, it requires a stop and restart of the *Podman machine*. See documentation .
+All its parameters can be changed, it requires a stop and restart of the *Podman machine*. See [documentation](https://docs.podman.io/en/latest/markdown/podman-machine-set.1.html) .
 
 Enter the following command to start Podman:
 
