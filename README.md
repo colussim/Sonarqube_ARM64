@@ -27,3 +27,43 @@ Like Docker, Podman uses specific Linux kernel features to create containers and
 * Ignition: Configuration management software for Fedora
 
 * gvisor-tap-vsock: Arranges port mapping from VM to host machine
+
+## Architecture
+
+![architecture, architecture](architecture.png)
+
+## Installing Podman
+
+First step you will need to install Homebrew, Homebrew is a command line package manager for macOS. 
+
+To install Homebrew on macOS, you will need to install XCode Command  Line tools and then download the installation script by running:
+```
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+ Before installing Podman, update the Homebrew formulae:
+```
+brew update
+```
+Next, install Podman by running the following command:
+```
+# arch -arm64 brew install podman
+```
+Homebrew downloads the necessary dependencies and installs Podman.
+
+## Start Podman
+
+When the installation finishes, prepare the Podman virtual machine by typing:
+```
+# podman machine init --rootful --disk-size 100 --cpus=4 --memory=6000 
+
+Downloading VM image: fedora-coreos-36.20220806.2.0-qemu.aarch64.qcow2.xz: done  
+Extracting compressed file
+Image resized.
+Machine init complete
+To start your machine run:
+
+        podman machine start
+#        
+```
+The system downloads the virtual machine and sets it up.
