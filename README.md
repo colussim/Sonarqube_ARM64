@@ -54,7 +54,7 @@ Homebrew downloads the necessary dependencies and installs Podman.
 ## Start Podman
 
 When the installation finishes, prepare the Podman virtual machine by typing:
-```
+```  
 # podman machine init --rootful --disk-size 100 --cpus=4 --memory=6000 
 
 Downloading VM image: fedora-coreos-36.20220806.2.0-qemu.aarch64.qcow2.xz: done  
@@ -62,10 +62,9 @@ Extracting compressed file
 Image resized.
 Machine init complete
 To start your machine run:
-```
-        podman machine start
+# podman machine start
 ```        
-#        
+#       
 ```
 The system downloads the virtual machine and sets it up.
 
