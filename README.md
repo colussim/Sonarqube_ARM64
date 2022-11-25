@@ -273,5 +273,5 @@ If you want to manage different container engines from a single UI and tray icon
 
 You can install Podman Desktop which allows you to easily work with containers from your local environment. Podman Desktop is built on Podman Engine. It is a familiar desktop graphical interface for the free and open container manager.
 
-![sonargui, sonarqui(podmangui.png)
+![sonargui, sonarqui](podmangui.png)
 ![sonarqui2, sonarqube2](podmangui2.png)
