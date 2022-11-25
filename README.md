@@ -237,12 +237,13 @@ If you want to access the volumes, to see the logs or other ... you can connect 
 
 Example with logs volume :
 
+```    
 # podman machine ssh
 
 Connecting to vm podman-machine-default. To close connection, use `~.` or `exit`                                                                                                               
 Fedora CoreOS 36.20220806.2.0                                                                                                                                                                  
 Tracker: https://github.com/coreos/fedora-coreos-tracker                                                                                                                                       
-Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                             ```               
+Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                                    
 [root@localhost ~]# podman volume list
 
 # 
