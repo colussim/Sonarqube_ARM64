@@ -275,3 +275,11 @@ You can install Podman Desktop which allows you to easily work with containers f
 
 ![sonargui, sonarqui](podmangui.png)
 ![sonarqui2, sonarqube2](podmangui2.png)
+
+## Resources
+
+[Resources](https://www.terraform.io/docs/index.html) 
+
+[Podman](https://www.terraform.io/docs/index.html)
+
+[Podman Desktop](https://www.terraform.io/docs/index.html)
