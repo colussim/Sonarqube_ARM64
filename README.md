@@ -64,8 +64,7 @@ Machine init complete
 To start your machine run:
 # podman machine start
 ```        
-#       
-```
+
 The system downloads the virtual machine and sets it up.
 
 By default this machine is currently configured  :
