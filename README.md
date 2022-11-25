@@ -67,3 +67,29 @@ To start your machine run:
 #        
 ```
 The system downloads the virtual machine and sets it up.
+
+By default this machine is currently configured  :
+
+in rootless mode
+
+* 1 CPU
+
+* 1 GB of memory
+
+This configuration is not sufficient to run Sonarqube .So I initialized the following parameters in the init command :
+
+* --rootful :  set root permissions
+
+* --disk-size : set disk size
+
+* --cpus: set numbers of cpus (with 2 cpus it works)
+
+* --memory : set memory
+
+See documentation machine-init
+
+All its parameters can be changed, it requires a stop and restart of the **Podman machine**. See documentation .
+
+Enter the following command to start Podman:
+
+
