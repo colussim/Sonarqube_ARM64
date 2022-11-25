@@ -88,8 +88,31 @@ This configuration is not sufficient to run Sonarqube .So I initialized the foll
 
 See documentation machine-init
 
-All its parameters can be changed, it requires a stop and restart of the **Podman machine**. See documentation .
+All its parameters can be changed, it requires a stop and restart of the *Podman machine*. See documentation .
 
 Enter the following command to start Podman:
 
+```
+# podman machine start
 
+Starting machine "podman-machine-default"
+Waiting for VM ...
+Mounting volume...
+
+Machine "podman-machine-default" started successfully
+#
+.....
+The output confirms the system started the Podman machine successfully.
+
+Podman, like others, is based on a configuration file called containers.conf and is located in ~/.config/containers. It allows, in particular, to position some paths.
+
+To verify, you can ssh into the VM and set kernel parameters needed for Sonarqube using:
+```
+# podman machine ssh
+
+Connecting to vm podman-machine-default. To close connection, use `~.` or `exit`                                                                                                               
+Fedora CoreOS 36.20220806.2.0                                                                                                                                                                  
+Tracker: https://github.com/coreos/fedora-coreos-tracker                                                                                                                                       
+Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                                            
+[root@localhost ~]#
+```
