@@ -278,8 +278,6 @@ You can install Podman Desktop which allows you to easily work with containers f
 
 ## Resources
 
-[Resources](https://www.terraform.io/docs/index.html) 
+[Podman](https://podman.io/)
 
-[Podman](https://www.terraform.io/docs/index.html)
-
-[Podman Desktop](https://www.terraform.io/docs/index.html)
+[Podman Desktop](https://github.com/containers/podman-desktop))
