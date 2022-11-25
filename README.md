@@ -151,3 +151,123 @@ Force of habit (or other scripts) may have you calling docker. To work around th
 ```
 # alias docker=podman
 ```
+Pull container image
+
+    Let’s try to pull a SonarQube image:
+```
+$ podman pull --arch=amd64 sonarqube:9.7.1-enterprise
+```
+    Let's check that the image is the right one:
+```
+# podman image ls                                                                                                                        
+REPOSITORY                   TAG               IMAGE ID      CREATED     SIZE                                                                                                                  
+docker.io/library/sonarqube  9.7.1-enterprise  41da366347d9  9 days ago  657 MB 
+#                                                                                                 
+```
+    Create three external volumes using the following commands:
+```
+# podman volume create sonarqube_data
+# podman volume create sonarqube_logs
+# podman volume create sonarqube_extensions
+
+Make sure that the volumes were created:
+# podman volume ls                                                                                                                       
+DRIVER      VOLUME NAME                                                                                                                                                                        
+local       sonarqube_data
+local       sonarqube_logs
+local       sonarqube_extensions
+# 
+```
+Running  SonarQube container
+
+Don't forget to set the Linux kernel parameters for SonarQube: 
+```
+# podman machine ssh
+
+Connecting to vm podman-machine-default. To close connection, use `~.` or `exit`                                                                                                               
+Fedora CoreOS 36.20220806.2.0                                                                                                                                                                  
+Tracker: https://github.com/coreos/fedora-coreos-tracker                                                                                                                                       
+Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                                            
+[root@localhost ~]# echo "vm.max_map_count = 524288" >> /etc/sysctl.d/99-sysctl.conf
+[root@localhost ~]# echo "fs.file-max = 131072" >> /etc/sysctl.d/99-sysctl.conf
+logout
+Connection to localhost closed.
+[root@localhost ~]# 
+[root@localhost ~]# sysctl -w vm.max_map_count=524288
+[root@localhost ~]# sysctl -w fs.file-max=131072
+[root@localhost ~]#
+```
+To set these values more permanently, you must update either /etc/sysctl.conf to reflect these values:
+```
+vm.max_map_count=524288
+fs.file-max=131072
+```
+In this case, the PostgreSQL database resides outside of the local container directly on the OS (I do not detail the installation of PostgreSQL in this document).
+
+To access the PostgreSQL database outside the container you will need to enter the local IP address of your Mac desktop and pass the parameter for the container run: 
+
+**--add-host=hostname:Desktop_ip_address**
+
+This flag can be used to add additional lines to /etc/hosts.If a container is connected to the default bridge network and linked with other containers, then the container’s /etc/hosts file is updated with the linked container’s name.
+
+Running Sonarqube :
+```
+# podman run --name sonarqube9 --rm -p 9000:9000 -e SONAR_JDBC_URL=jdbc:postgresql://10.150.121.110:5432/sonarqube09 \
+-e SONAR_JDBC_USERNAME=sonarcont -e SONAR_JDBC_PASSWORD=xxxx \
+-e SONAR_SEARCH_JAVAADDITIONALOPTS="-Dbootstrap.system_call_filter=false" \
+-v sonarqube_data:/opt/sonarqube/data -v sonarqube_extensions:/opt/sonarqube/extensions -v sonarqube_logs:/opt/sonarqube/logs -e SONAR_SEARCH_JAVAADDITIONALOPTS="-Dbootstrap.system_call_filter=false" --add-host=database:10.150.121.110 41da366347d9
+.............
+.............
+2022.08.22 11:30:24 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2022.08.22 11:30:32 INFO  ce[][o.s.c.c.ComputeEngineContainerImpl] Running Enterprise edition
+2022.08.22 11:30:33 INFO  ce[][o.s.s.e.CoreExtensionBootstraper] Bootstrapping Governance
+2022.08.22 11:30:33 INFO  ce[][o.s.s.e.CoreExtensionBootstraper] Bootstrapping Governance (done) | time=36ms
+2022.08.22 11:30:33 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is started
+2022.08.22 11:30:33 INFO  app[][o.s.a.SchedulerImpl] Process[ce] is up
+2022.08.22 11:30:33 INFO  app[][o.s.a.SchedulerImpl] SonarQube is operational
+``` 
+
+After a few minutes the container is up 😀
+
+![sonarqubeai, sonarqubeai](sonarqube1.png)
+
+## Useful
+
+If you want to access the volumes, to see the logs or other ... you can connect to the Podman machine and mount the desired volume.
+
+Example with logs volume :
+
+# podman machine ssh
+
+Connecting to vm podman-machine-default. To close connection, use `~.` or `exit`                                                                                                               
+Fedora CoreOS 36.20220806.2.0                                                                                                                                                                  
+Tracker: https://github.com/coreos/fedora-coreos-tracker                                                                                                                                       
+Discuss: https://discussion.fedoraproject.org/tag/coreos                                                                                                                                                                                                                                                                            
+[root@localhost ~]# podman volume list
+
+# 
+DRIVER      VOLUME NAME                                                                                                                                                                        
+local       sonarqube_data
+local       sonarqube_logs
+local       sonarqube_extensions
+#
+# podman volume mount sonarqube_logs
+/var/lib/containers/storage/volumes/sonarqube_logs/_data
+#
+# ls /var/lib/containers/storage/volumes/sonarqube_logs/_data
+access.log  ce.log  es.log  sonar.log  web.log
+#
+
+To unmount the volume place the following command :
+                                                                                                                                           
+# podman volume unmount sonarqube_logs                                                                                          
+sonarqube_logs
+#
+Next
+
+If you want to manage different container engines from a single UI and tray icon… 
+
+You can install Podman Desktop which allows you to easily work with containers from your local environment. Podman Desktop is built on Podman Engine. It is a familiar desktop graphical interface for the free and open container manager.
+
+![sonargui, sonarqui(podmangui.png)
+![sonarqui2, sonarqube2](podmangui2.png)
