@@ -280,4 +280,4 @@ You can install Podman Desktop which allows you to easily work with containers f
 
 [Podman](https://podman.io/)
 
-[Podman Desktop](https://github.com/containers/podman-desktop))
+[Podman Desktop](https://github.com/containers/podman-desktop)
